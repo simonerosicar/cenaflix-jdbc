@@ -23,7 +23,9 @@ public class Conexao {
     private static final String USUARIO = "root";
 
     /** Senha do banco de dados */
-    private static final String SENHA   = "";
+  private static final String SENHA = System.getenv("DB_PASSWORD") != null 
+    ? System.getenv("DB_PASSWORD") 
+    : "";
 
     /**
      * Estabelece e retorna uma conexão ativa com o banco de dados.
