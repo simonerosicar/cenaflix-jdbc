@@ -1,0 +1,10 @@
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+nbdist/
+*.class
+
+# Sistema
+.DS_Store
+Thumbs.db
