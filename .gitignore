@@ -13,3 +13,7 @@
 # Sistema
 .DS_Store
 Thumbs.db
+nbproject/
+build.xml
+manifest.mf
+test/
