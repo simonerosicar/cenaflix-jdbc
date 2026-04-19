@@ -1,8 +1,13 @@
 # NetBeans
-nbproject/private/
-build/
-nbbuild/
-nbdist/
+/nbproject/private/
+
+# Build
+/build/
+/dist/
+/nbbuild/
+/nbdist/
+
+# Arquivos compilados
 *.class
 
 # Sistema
