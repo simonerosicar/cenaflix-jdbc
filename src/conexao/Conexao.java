@@ -23,7 +23,7 @@ public class Conexao {
     private static final String USUARIO = "root";
 
     /** Senha do banco de dados */
-    private static final String SENHA   = "320526";
+    private static final String SENHA   = "";
 
     /**
      * Estabelece e retorna uma conexão ativa com o banco de dados.
