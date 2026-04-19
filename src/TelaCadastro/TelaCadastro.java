@@ -13,7 +13,7 @@ import model.Video;
  * ATIVIDADE1, com validação de campos e formatação
  * automática da data no padrão DD/MM/YYYY.
  *
- * @author SeuNome
+ * @author Simone Cardozo
  * @version 2.0
  * @see dao.VideoDAO
  * @see model.Video

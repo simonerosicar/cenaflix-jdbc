@@ -7,7 +7,7 @@ import java.sql.Date;
  * Contém os atributos mapeados para as colunas da tabela {@code videos}
  * no banco de dados {@code ATIVIDADE1}.
  *
- * @author SeuNome
+ * @author Simone Cardozo
  * @version 2.0
  */
 public class Video {

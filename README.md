@@ -31,7 +31,7 @@ Implementa CRUD completo com Java Swing e MySQL via JDBC.
 ## Screenshots
 
 ### Tela de Gerenciamento com filtro
-![Gerenciar](prints/print_tela_busca.png)
+![Gerenciar](prints/print_tela_busca.jpg)
 
 ### Banco de dados MySQL
 ![Workbench](prints/print_workbench.png)

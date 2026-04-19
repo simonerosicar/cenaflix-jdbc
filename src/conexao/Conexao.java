@@ -11,7 +11,7 @@ import java.sql.DriverManager;
  * JDBC a cada chamada.
  * </p>
  *
- * @author SeuNome
+ * @author Simone Cardozo
  * @version 2.0
  */
 public class Conexao {

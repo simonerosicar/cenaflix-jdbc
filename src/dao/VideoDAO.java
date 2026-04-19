@@ -13,7 +13,7 @@ import java.util.List;
  * do banco de dados ATIVIDADE1, utilizando JDBC para
  * comunicação com o MySQL.
  *
- * @author SeuNome
+ * @author Simone Cardozo
  * @version 2.0
  * @see conexao.Conexao
  * @see model.Video
