@@ -1,0 +1,25 @@
+# Build output
+build/
+dist/
+*.class
+*.jar
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# Credenciais — NUNCA versionar este arquivo
+src/db.properties
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDE genérico
+*.iml
+.idea/
