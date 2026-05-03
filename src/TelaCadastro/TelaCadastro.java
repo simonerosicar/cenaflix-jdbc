@@ -10,24 +10,27 @@ import model.Video;
 import view.TelaGerenciar;
 
 /**
- * Tela principal de cadastro de vídeos do sistema Cenaflix.
- * Interface gráfica construída com Java Swing.
+ * Tela de cadastro de vídeos do sistema Cenaflix.
+ * Sprint 1 — Atividade 1.
+ *
+ * @author Simone Cardozo
+ * @version 1.0
  */
 public class TelaCadastro extends JFrame {
 
     private JTextField txtId, txtNome, txtData, txtCategoria;
     private JButton btnSalvar, btnLimpar, btnGerenciar;
 
-    // Cores do tema Cenaflix
-    private static final Color COR_FUNDO      = new Color(18, 18, 18);
-    private static final Color COR_PAINEL     = new Color(30, 30, 30);
-    private static final Color COR_CAMPO      = new Color(45, 45, 45);
-    private static final Color COR_TEXTO      = new Color(230, 230, 230);
-    private static final Color COR_LABEL      = new Color(180, 180, 180);
-    private static final Color COR_SALVAR     = new Color(229, 9, 20);   // vermelho Netflix
-    private static final Color COR_LIMPAR     = new Color(80, 80, 80);
-    private static final Color COR_TITULO     = new Color(229, 9, 20);
+    // Cores do tema Cenaflix (wireframe)
+    private static final Color COR_FUNDO  = new Color(220, 220, 220);
+    private static final Color COR_CAMPO  = Color.WHITE;
+    private static final Color COR_TEXTO  = Color.BLACK;
+    private static final Color COR_LABEL  = Color.BLACK;
+    private static final Color COR_BORDA  = new Color(180, 180, 180);
 
+    /**
+     * Construtor da tela de cadastro.
+     */
     public TelaCadastro() {
         configurarJanela();
         construirInterface();
@@ -39,11 +42,11 @@ public class TelaCadastro extends JFrame {
     // -------------------------------------------------------------------------
     private void configurarJanela() {
         setTitle("Cenaflix — Cadastro de Vídeos");
-        setSize(500, 360);
+        setSize(500, 450);
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         getContentPane().setBackground(COR_FUNDO);
     }
 
@@ -52,70 +55,109 @@ public class TelaCadastro extends JFrame {
     // -------------------------------------------------------------------------
     private void construirInterface() {
 
-        // Título
+        // Título CENAFLIX
         JLabel lblTitulo = new JLabel("CENAFLIX", SwingConstants.CENTER);
-        lblTitulo.setFont(new Font("Arial", Font.BOLD, 22));
-        lblTitulo.setForeground(COR_TITULO);
-        lblTitulo.setBounds(0, 15, 500, 30);
+        lblTitulo.setFont(new Font("Arial", Font.BOLD, 26));
+        lblTitulo.setForeground(COR_TEXTO);
+        lblTitulo.setBounds(0, 18, 500, 35);
         add(lblTitulo);
 
-        JLabel lblSubtitulo = new JLabel("Cadastro de Vídeos", SwingConstants.CENTER);
-        lblSubtitulo.setFont(new Font("Arial", Font.PLAIN, 13));
-        lblSubtitulo.setForeground(COR_LABEL);
-        lblSubtitulo.setBounds(0, 45, 500, 20);
-        add(lblSubtitulo);
-
-        // Separador visual
-        JSeparator sep = new JSeparator();
-        sep.setBounds(30, 72, 440, 2);
-        sep.setForeground(COR_CAMPO);
-        add(sep);
+        // Subtítulo
+        JLabel lblSub = new JLabel("CADASTRO DE VÍDEOS", SwingConstants.CENTER);
+        lblSub.setFont(new Font("Arial", Font.BOLD, 14));
+        lblSub.setForeground(COR_TEXTO);
+        lblSub.setBounds(0, 55, 500, 22);
+        add(lblSub);
 
         // Campos
-        txtId       = criarCampo("ID:",        80);
-        txtNome     = criarCampo("Nome:",      120);
-        txtData     = criarCampo("Data (DD/MM/AAAA):", 160);
-        txtCategoria = criarCampo("Categoria:", 200);
+        txtId        = criarCampo("ID:",                  95);
+        txtNome      = criarCampo("Nome:",                145);
+        txtData      = criarCampo("Data (DD/MM/AAAA):",  195);
+        txtCategoria = criarCampo("Categoria:",           245);
 
-        // Botões
-        btnSalvar   = criarBotao("Salvar",    60,  COR_SALVAR);
-        btnLimpar   = criarBotao("Limpar",    185, COR_LIMPAR);
-        btnGerenciar = criarBotao("Gerenciar", 310, new Color(30, 100, 180));
+        // Placeholders
+        adicionarPlaceholder(txtId,        "Ex: 1");
+        adicionarPlaceholder(txtNome,      "Ex: Interestelar");
+        adicionarPlaceholder(txtData,      "Ex: 10/11/2014");
+        adicionarPlaceholder(txtCategoria, "Ex: Ficção Científica");
+
+        // Botões — mais afastados do último campo
+        btnSalvar    = criarBotao("Salvar",       60,  345);
+        btnLimpar    = criarBotao("Limpar",       195, 345);
+        btnGerenciar = criarBotao("Ver Listagem", 330, 345);
     }
 
     /**
-     * Cria um par label + campo de texto com o estilo padrão da tela.
+     * Adiciona texto placeholder (dica) a um campo de texto.
+     * O texto aparece em cinza quando o campo está vazio e some ao digitar.
+     *
+     * @param campo  campo de texto
+     * @param texto  texto de dica
+     */
+    private void adicionarPlaceholder(JTextField campo, String texto) {
+        campo.setForeground(Color.GRAY);
+        campo.setText(texto);
+
+        campo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campo.getText().equals(texto)) {
+                    campo.setText("");
+                    campo.setForeground(COR_TEXTO);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campo.getText().isEmpty()) {
+                    campo.setForeground(Color.GRAY);
+                    campo.setText(texto);
+                }
+            }
+        });
+    }
+
+    /**
+     * Cria um par label + campo de texto com o estilo do wireframe.
+     *
+     * @param labelTexto texto do rótulo
+     * @param y          posição vertical
+     * @return o campo de texto criado
      */
     private JTextField criarCampo(String labelTexto, int y) {
         JLabel lbl = new JLabel(labelTexto);
-        lbl.setBounds(30, y, 150, 25);
+        lbl.setBounds(80, y, 160, 22);
         lbl.setForeground(COR_LABEL);
-        lbl.setFont(new Font("Arial", Font.PLAIN, 12));
+        lbl.setFont(new Font("Arial", Font.BOLD, 12));
         add(lbl);
 
         JTextField campo = new JTextField();
-        campo.setBounds(190, y, 220, 28);
+        campo.setBounds(80, y + 22, 340, 28);
         campo.setBackground(COR_CAMPO);
         campo.setForeground(COR_TEXTO);
-        campo.setCaretColor(COR_TEXTO);
-        campo.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 70)));
         campo.setFont(new Font("Arial", Font.PLAIN, 13));
+        campo.setBorder(BorderFactory.createLineBorder(COR_BORDA));
         add(campo);
 
         return campo;
     }
 
     /**
-     * Cria um botão com o estilo padrão da tela.
+     * Cria um botão com o estilo do wireframe.
+     *
+     * @param texto texto do botão
+     * @param x     posição horizontal
+     * @param y     posição vertical
+     * @return o botão criado
      */
-    private JButton criarBotao(String texto, int x, Color cor) {
+    private JButton criarBotao(String texto, int x, int y) {
         JButton btn = new JButton(texto);
-        btn.setBounds(x, 270, 100, 35);
-        btn.setBackground(cor);
-        btn.setForeground(Color.WHITE);
-        btn.setFont(new Font("Arial", Font.BOLD, 13));
+        btn.setBounds(x, y, 120, 35);
+        btn.setBackground(COR_FUNDO);
+        btn.setForeground(COR_TEXTO);
+        btn.setFont(new Font("Arial", Font.BOLD, 12));
         btn.setFocusPainted(false);
-        btn.setBorderPainted(false);
+        btn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add(btn);
         return btn;
@@ -126,7 +168,7 @@ public class TelaCadastro extends JFrame {
     // -------------------------------------------------------------------------
     private void configurarEventos() {
 
-        // Capitalizar primeira letra do nome automaticamente
+        // Capitalizar primeira letra do nome
         txtNome.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) { capitalizarPrimeiraLetra(); }
             public void removeUpdate(DocumentEvent e) {}
@@ -169,13 +211,12 @@ public class TelaCadastro extends JFrame {
             }
         });
 
-        // Navegação por Enter entre campos
+        // Navegação por Enter
         txtId.addActionListener(e -> txtNome.requestFocus());
         txtNome.addActionListener(e -> txtData.requestFocus());
         txtData.addActionListener(e -> txtCategoria.requestFocus());
         txtCategoria.addActionListener(e -> salvar());
 
-        // Botões
         btnSalvar.addActionListener(e -> salvar());
         btnLimpar.addActionListener(e -> limpar());
         btnGerenciar.addActionListener(e -> {
@@ -187,40 +228,47 @@ public class TelaCadastro extends JFrame {
     // -------------------------------------------------------------------------
     // Ações
     // -------------------------------------------------------------------------
-    public void salvar() {
 
-        // Validação: campos obrigatórios
-        if (txtId.getText().trim().isEmpty() ||
-            txtNome.getText().trim().isEmpty() ||
-            txtData.getText().trim().isEmpty() ||
-            txtCategoria.getText().trim().isEmpty()) {
+    private String getValor(JTextField campo) {
+        String texto = campo.getText().trim();
+        // Ignora se for placeholder (texto cinza)
+        if (campo.getForeground().equals(Color.GRAY)) return "";
+        return texto;
+    }
+
+    /**
+     * Valida os campos e salva o vídeo no banco de dados.
+     */
+    public void salvar() {
+        String id       = getValor(txtId);
+        String nome     = getValor(txtNome);
+        String data     = getValor(txtData);
+        String categoria = getValor(txtCategoria);
+
+        if (id.isEmpty() || nome.isEmpty() || data.isEmpty() || categoria.isEmpty()) {
             mostrarErro("Preencha todos os campos antes de salvar.");
             return;
         }
 
-        // Validação: ID numérico
-        int id;
+        int idInt;
         try {
-            id = Integer.parseInt(txtId.getText().trim());
+            idInt = Integer.parseInt(id);
         } catch (NumberFormatException ex) {
             mostrarErro("O campo ID deve conter apenas números.");
             return;
         }
 
-        // Validação: data no formato DD/MM/AAAA
-        Date data;
+        Date dataSQL;
         try {
-            String[] partes = txtData.getText().trim().split("/");
+            String[] partes = data.split("/");
             if (partes.length != 3 || partes[2].length() != 4) throw new Exception();
-            String dataFormatada = partes[2] + "-" + partes[1] + "-" + partes[0];
-            data = Date.valueOf(dataFormatada);
+            dataSQL = Date.valueOf(partes[2] + "-" + partes[1] + "-" + partes[0]);
         } catch (Exception ex) {
             mostrarErro("Data inválida. Use o formato DD/MM/AAAA.\nExemplo: 15/06/2023");
             return;
         }
 
-        // Persistência
-        Video video = new Video(id, txtNome.getText().trim(), data, txtCategoria.getText().trim());
+        Video video = new Video(idInt, nome, dataSQL, categoria);
         VideoDAO dao = new VideoDAO();
         boolean sucesso = dao.inserir(video);
 
@@ -230,15 +278,18 @@ public class TelaCadastro extends JFrame {
                 "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limpar();
         } else {
-            mostrarErro("Não foi possível salvar. Verifique a conexão com o banco de dados.");
+            mostrarErro("Não foi possível inserir os dados! Por favor, verifique os valores digitados.");
         }
     }
 
+    /**
+     * Limpa todos os campos da tela e restaura os placeholders.
+     */
     public void limpar() {
-        txtId.setText("");
-        txtNome.setText("");
-        txtData.setText("");
-        txtCategoria.setText("");
+        adicionarPlaceholder(txtId,        "Ex: 1");
+        adicionarPlaceholder(txtNome,      "Ex: Interestelar");
+        adicionarPlaceholder(txtData,      "Ex: 10/11/2014");
+        adicionarPlaceholder(txtCategoria, "Ex: Ficção Científica");
         txtId.requestFocus();
     }
 
@@ -249,8 +300,13 @@ public class TelaCadastro extends JFrame {
     // -------------------------------------------------------------------------
     // Main
     // -------------------------------------------------------------------------
+
+    /**
+     * Ponto de entrada da aplicação.
+     *
+     * @param args argumentos de linha de comando (não utilizados)
+     */
     public static void main(String[] args) {
-        // Aparência nativa do sistema operacional
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ignored) {}
